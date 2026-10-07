@@ -1,0 +1,20 @@
+{
+  "experiment_id": "C001",
+  "description": "LightGBM (original tuned params), v2 features (lda_top NaN bug fixed), exact NA reconstruction, balanced training weights, 5 seeds x 5 folds; per-class decision multipliers tuned for macro F1 on a class-balanced test distribution",
+  "features": "v2",
+  "na": "exact",
+  "regime": "balanced",
+  "members": [
+    {"name": "lgbm", "blend_weight": 1.0, "cw": "balanced", "n_bags": 1, "seeds": [0, 1, 2, 3, 4],
+     "params": {"n_estimators": 600, "num_leaves": 24, "min_child_samples": 18, "colsample_bytree": 0.512,
+                "subsample": 0.725, "reg_lambda": 0.192, "reg_alpha": 0.0025, "learning_rate": 0.03, "subsample_freq": 1}}
+  ],
+  "decision": {"rule": "multipliers", "fit_on": "final_oof"},
+  "evidence": {
+    "E001_reference_dev_cv_balanced_cf": 0.3390,
+    "E003_dev_cv_balanced_cf": 0.3400,
+    "E003_vs_E001": "+0.0010 (SE 0.0014, 8/15 folds) - noise level; adopted because it removes a train/test inconsistency, not for the score",
+    "decision_multipliers_gain_dev": "+0.014 to +0.016 balanced macro F1 (cross-fitted)",
+    "test_prior_evidence": "adversarial AUC 0.529 (train mix) -> 0.492 (train reweighted to uniform classes)"
+  }
+}

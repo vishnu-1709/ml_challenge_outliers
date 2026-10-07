@@ -1,0 +1,29 @@
+
+=== E001: Reference: original champion (v1 feats, native NA, balanced cw) on the new dev protocol
+  repeat seed 11: train-F1 0.3162 | balanced-F1 0.3211  (90s)
+  repeat seed 22: train-F1 0.3183 | balanced-F1 0.3263  (179s)
+  repeat seed 33: train-F1 0.3149 | balanced-F1 0.3215  (264s)
+  BALANCED  argmax 0.3230 | cf 0.3390 (fold 0.3387 ± 0.0060)  per-class [0.397 0.246 0.274 0.299 0.479]
+  TRAIN-MIX argmax 0.3165 | cf 0.3205
+  mean cf weights (balanced): [1.   0.71 0.61 0.58 0.51]  runtime 284s
+
+=== E002: Fixing the lda_top NaN bug (v2) does not hurt and removes train/test inconsistency
+  repeat seed 11: train-F1 0.3197 | balanced-F1 0.3272  (91s)
+  repeat seed 22: train-F1 0.3204 | balanced-F1 0.3285  (176s)
+  repeat seed 33: train-F1 0.3162 | balanced-F1 0.3219  (263s)
+  BALANCED  argmax 0.3258 | cf 0.3387 (fold 0.3382 ± 0.0048)  per-class [0.388 0.263 0.268 0.305 0.471]
+  TRAIN-MIX argmax 0.3187 | cf 0.3193
+  vs E001: -0.0005 (SE 0.0013, wins 7/15)
+  mean cf weights (balanced): [1.   0.75 0.62 0.59 0.5 ]  runtime 282s
+
+=== E003: Exact NA reconstruction (LDA sum, selfref min==max, empty articles) recovers signal
+  repeat seed 11: train-F1 0.3193 | balanced-F1 0.3254  (84s)
+  repeat seed 22: train-F1 0.3170 | balanced-F1 0.3239  (171s)
+  repeat seed 33: train-F1 0.3201 | balanced-F1 0.3275  (259s)
+  BALANCED  argmax 0.3256 | cf 0.3400 (fold 0.3396 ± 0.0061)  per-class [0.392 0.26  0.263 0.308 0.477]
+  TRAIN-MIX argmax 0.3188 | cf 0.3204
+  vs E001: +0.0010 (SE 0.0014, wins 8/15)
+  mean cf weights (balanced): [1.   0.73 0.6  0.59 0.5 ]  runtime 280s
+
+=== E004: Median imputation beats native NaN handling (test has no NaN)
+  repeat seed 11: train-F1 0.3184 | balanced-F1 0.3258  (81s)
